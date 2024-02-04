@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Book Model:
+model Book {
+  id        String      @id @default(uuid())
+  title     String
+  ISBN      String      @unique
+  quantity  Int         @default(0)
+  location  String
+  Borrowing Borrowing[]
+}
+
+// Borrower (User) Model:
+model Borrower {
+  id             String      @id @default(uuid())
+  name           String
+  email          String      @unique
+  registeredDate DateTime    @default(now())
+  Borrowing      Borrowing[]
+}
+
+
+// Borrowing Model: 
+// Many to Many Relation between "Book" & "Borrower" using the table (Borrowing)
+// -----------------
+
+// Borrowing ID (Primary Key)   - Unique identifier for each borrowing transaction. Integer.
+// Book ISBN (Foreign Key)      - References the ISBN of the borrowed book. String.
+// Borrower ID (Foreign Key)    - References the ID of the borrower. Integer.
+// Borrowing Date               - Date when the book was borrowed. Date/Time.
+// Due Date                     - Date by which the book should be returned. Date/Time.
+// Return Date                  - Date when the book was returned (NULL if not returned yet). Date/Time or Nullable Date/Time.
+
+
+model Borrowing {
+  id            String    @id @default(uuid())
+  book          Book      @relation(fields: [bookISBN], references: [ISBN])
+  bookISBN      String
+  borrower      Borrower  @relation(fields: [borrowerID], references: [id])
+  borrowerID    String
+  borrowingDate DateTime
+  dueDate       DateTime
+  returnDate    DateTime?
+}
