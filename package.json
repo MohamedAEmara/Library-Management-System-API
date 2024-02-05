@@ -2,9 +2,9 @@
   "name": "library-management-system-api",
   "version": "1.0.0",
   "description": "API for borrowing, adding, updating, removing, listing books",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "nodemone app.js"
+    "start": "nodemon  ./src/app.js"
   },
   "repository": {
     "type": "git",
@@ -12,6 +12,7 @@
   },
   "author": "Mohamed Emara",
   "license": "ISC",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/MohamedAEmara/Library-Management-System-API/issues"
   },

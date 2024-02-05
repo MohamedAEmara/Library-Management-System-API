@@ -1,4 +1,4 @@
-function errorMiddleware (error, req, res, next) {
+function appErrorMiddleware (error, req, res, next) {
     const status = error.statusCode || 500;
     const message = error.message || 'Something went wrong!';
 
@@ -8,5 +8,4 @@ function errorMiddleware (error, req, res, next) {
     }); 
 }
 
-
-export default errorMiddleware;
+export default appErrorMiddleware;
