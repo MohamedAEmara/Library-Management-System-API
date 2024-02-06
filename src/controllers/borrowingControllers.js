@@ -38,6 +38,9 @@ export const checkoutBook = async (req, res, next) => {
         const borrower = await prisma.borrower.findFirst({
             where: {
                 id: borrowerID
+            },
+            include: {
+                Borrowing: true
             }
         });
         if(!borrower) {
@@ -47,7 +50,21 @@ export const checkoutBook = async (req, res, next) => {
         }
 
 
-        // >>>>>>>>>>>>>>>> If there's no error, Now, go to checkout part <<<<<<<<<<<<<<
+        // Check if this user has already a copy of this book:
+        let hasCopy = 0;
+        (borrower.Borrowing).forEach(borrowing => {
+            if(borrowing.bookISBN === bookISBN)
+                hasCopy = 1;
+        });
+        
+        if(hasCopy === 1) {
+            const error = new Error('You cannot borrow more than one copy of the same book.');
+            error.statusCode = 400;
+            return next(error);
+        }
+
+
+        // >>>>>>>>>>>>>>>> If there's no error, START checkout part <<<<<<<<<<<<<<
         console.log(typeof(dueDate));
 
         // 1- create a borrowing record.
