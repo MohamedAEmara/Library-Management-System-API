@@ -40,9 +40,14 @@ export const checkoutBook = async (req, res, next) => {
                 id: borrowerID
             },
             include: {
-                Borrowing: true
+                Borrowing: {
+                    where: {
+                        returnDate: null
+                    }
+                }
             }
         });
+        console.log(borrower);
         if(!borrower) {
             const error = new Error('There is no borrower with this id');
             error.statusCode = 400;
@@ -53,7 +58,7 @@ export const checkoutBook = async (req, res, next) => {
         // Check if this user has already a copy of this book:
         let hasCopy = 0;
         (borrower.Borrowing).forEach(borrowing => {
-            if(borrowing.bookISBN === bookISBN)
+            if(borrowing.bookISBN === bookISBN && !borrowing.returnDate)
                 hasCopy = 1;
         });
         
@@ -116,4 +121,83 @@ export const checkoutBook = async (req, res, next) => {
     } catch (err) {
         next(err);
     }
+}
+
+
+
+export const returnBook = async (req, res, next) => {
+    try {
+        // bookISBN                 ===>        req.params
+        // borrowerID               ===>        req.body
+        const ISBN = req.params.bookISBN;
+        const { borrowerID } = req.body;
+
+        const book = await prisma.book.findFirst({
+            where: {
+                ISBN
+            }
+        });
+
+        // Validate ISBN..
+        if(!book) {
+            const error = new Error('There is no book with this ISBN.');
+            error.statusCode = 400;
+            return next(error);
+        }
+
+        // Check if this user owns this book
+        const borrower = await prisma.borrower.findFirst({
+            where: {
+                id: borrowerID
+            },
+            include: {
+                Borrowing: {
+                    where: {
+                        bookISBN: ISBN
+                    }
+                }
+            }
+        });
+
+        // 1- Update the returnDate in borrowing table with Date.now()..
+
+        // If this book is present in borrowings  &&  this book doens't have a returnDate yet
+        // Borrower can return this book
+        // Otherwise, return error msg... 
+        if(borrower.Borrowing[0] && !borrower.Borrowing[0].returnDate) {
+            const borrowing = await prisma.borrowing.update({
+                where: {
+                    id: borrower.Borrowing[0].id
+                },
+                data: {
+                    returnDate: new Date(Date.now())
+                }
+            });
+
+            // 2- Increment the remaining quantity of this book
+ 
+            await prisma.book.update({
+                where: {
+                    ISBN: borrowing.bookISBN
+                },
+                data: {
+                    quantity: {
+                        increment: 1
+                    }
+                }
+            })
+
+            return res.status(200).json({
+                status: 'success',
+                borrowing
+            });
+        } else {
+            const error = new Error("You cannot return a book that you don't have.");
+            error.statusCode = 400;
+            return next(error); 
+        }
+    } catch (err) {
+        next(err);
+    }
+    
 }
