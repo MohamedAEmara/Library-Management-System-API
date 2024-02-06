@@ -171,7 +171,7 @@ export const deleteBook = async (req, res, next) => {
 export const searchBooks = async (req, res, next) => {
     try {
         const { title, isbn, author } = req.query;
-        console.log(title, isbn, author);
+ 
         const books = await prisma.book.findMany({
             where: {
                 AND: [

@@ -1,13 +1,17 @@
 import prisma from '../DB/db.js';
+import { lowerEmail } from '../../utils/lowerEmail.js';
 
 export const createBorrower = async (req, res, next) => {
     try {
-        const { name, email } = req.body;
+        let { name, email } = req.body;
         if(!name || !email) {
             const error = new Error('Please insert your name & email');
             error.statusCode = 400;
             return next(error);
         }
+
+        // lowercase email to make it case insensitive..
+        email = lowerEmail(email);
 
         // Validate provided email is unique:
         const usedEmail = await prisma.borrower.findFirst({
@@ -113,13 +117,17 @@ export const deleteBorrower = async (req, res, next) => {
 export const updateBorrower = async (req, res, next) => {
     try {
         const id = req.params.borrowerID;
-        const { email, name } = req.body;
+        let { email, name } = req.body;
 
         const borrower = await prisma.borrower.findFirst({
             where: {
                 id
             }
         });
+
+        // lowercase email to make it case insensitive..
+        if(email)
+            email = lowerEmail(email);
 
         if(!borrower) {
             const error = new Error('There is no borrower with this ID.');
