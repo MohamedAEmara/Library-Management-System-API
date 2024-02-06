@@ -166,3 +166,28 @@ export const deleteBook = async (req, res, next) => {
         next(err);
     }
 }
+
+
+export const searchBooks = async (req, res, next) => {
+    try {
+        const { title, isbn, author } = req.query;
+        console.log(title, isbn, author);
+        const books = await prisma.book.findMany({
+            where: {
+                AND: [
+                    // All query fields are case insensitive
+                    { title: { contains: title || "", mode: 'insensitive' } },
+                    { author: { contains: author || "", mode: 'insensitive' }},
+                    { ISBN: { contains: isbn || '', mode: 'insensitive'}}   
+                ]
+            }
+        });
+
+        res.status(200).json({
+            status: 'success',
+            books
+        });
+    } catch (err) {
+        next(err);
+    }
+}
