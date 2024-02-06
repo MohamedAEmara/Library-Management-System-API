@@ -141,3 +141,28 @@ export const getAllBooks = async (req, res, next) => {
         next(err);
     }
 }
+
+
+export const deleteBook = async (req, res, next) => {
+    try {
+        const id = req.params.bookID;
+        const book = await prisma.book.findFirst({
+            where: {
+                id
+            }
+        });
+    
+        if(!book) {
+            const error = new Error('There is no book with this ID.');
+            error.statusCode = 400;
+            return next(error);
+        }    
+         
+        res.status(200).json({
+            status: 'success',
+            message: 'Book deleted successfully'
+        });
+    } catch (err) {
+        next(err);
+    }
+}

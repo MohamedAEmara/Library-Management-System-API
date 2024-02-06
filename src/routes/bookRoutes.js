@@ -1,6 +1,6 @@
 import experss from 'express';
 const router = experss.Router();
-import { createBook, getSingleBook, getAllBooks, updateBook } from '../controllers/bookControllers.js';
+import { createBook, getSingleBook, getAllBooks, updateBook, deleteBook } from '../controllers/bookControllers.js';
 
 router
     .route('/')
@@ -10,6 +10,7 @@ router
 router    
     .route('/:bookID')
     .get(getSingleBook)
-    .patch(updateBook);
-    
+    .patch(updateBook)
+    .delete(deleteBook);
+
 export default router;

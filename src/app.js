@@ -2,7 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import requestLoggerMiddleware from './middlewares/requestLogger.js';
 import errorMiddleware from './middlewares/appError.js';
-
+import bookRouter from './routes/bookRoutes.js';
+import borrowerRouter from "./routes/borrowerRoutes.js";
 
 dotenv.config({ path: '.env' });
 const app = express();
@@ -10,8 +11,8 @@ const app = express();
 app.use(express.json());
 app.use(requestLoggerMiddleware);
 
-import bookRouter from './routes/bookRoutes.js';
 app.use('/api/v1/book', bookRouter);
+app.use('/api/v1/borrower', borrowerRouter);
 
 // Error handler middleware must be after all routes to call it as (next) to avoid throwing errors.
 app.use(errorMiddleware);
