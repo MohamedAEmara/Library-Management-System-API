@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { checkoutBook, returnBook } from "../controllers/borrowingControllers.js";
+import { checkoutBook, getAllBorrowings, returnBook } from "../controllers/borrowingControllers.js";
 const router = Router();
 
 
@@ -9,6 +9,9 @@ router.post('/:bookISBN', checkoutBook);
 
 // Route for returning a book
 router.post('/return/:bookISBN', returnBook);
+
+// Router for getting all borrower books
+router.get('/borrowings', getAllBorrowings);
 
 
 
