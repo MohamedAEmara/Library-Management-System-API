@@ -1,5 +1,5 @@
 import prisma from '../DB/db.js';
-import { lowerEmail } from '../../utils/lowerEmail.js';
+import { lowerEmail } from '../utils/lowerEmail.js';
 
 export const createBorrower = async (req, res, next) => {
     try {
