@@ -131,6 +131,12 @@ export const returnBook = async (req, res, next) => {
         const ISBN = req.params.bookISBN;
         const { borrowerID } = req.body;
 
+        if(!borrowerID) {
+            const error = new Error('borrowerID is Missing in request body.');
+            error.statusCode = 400;
+            return next(error);
+        }
+
         const book = await prisma.book.findFirst({
             where: {
                 ISBN
@@ -153,6 +159,12 @@ export const returnBook = async (req, res, next) => {
                 Borrowing: true
             }
         });
+        
+        if(!borrower) {
+            const error = new Error("Please enter a valid ID for borrower.");
+            error.statusCode = 400;
+            return next(error);
+        }
 
         let hasCopy = 0;
         (borrower.Borrowing).forEach(borrowing => {
