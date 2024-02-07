@@ -1,6 +1,6 @@
 import experss from 'express';
 const router = experss.Router();
-import { createBorrower, deleteBorrower, getAllBorrowers, getSingleBorrorwer, updateBorrower } from '../controllers/borrowerController.js';
+import { createBorrower, deleteBorrower, getAllBorrowers, getSingleBorrorwer, updateBorrower } from '../controllers/borrowerControllers.js';
 
 router
     .route('/')
