@@ -256,3 +256,41 @@ export const getAllBorrowings = async (req, res, next) => {
 }
 
 
+
+export const getOverdue = async (req, res, next) => {
+    try {
+        const dueBorrowings = await prisma.borrowing.findMany({
+            where: {
+                AND: {
+                    returnDate: null,
+                    // and dueDate is less than Date.now()
+                    dueDate: {
+                        lt: new Date(Date.now())
+                    }
+                }
+            },
+            // Aggregate book_title & borrower {name & email} for more human friendly response...
+            include: {
+                book: {
+                    select: {
+                        title: true
+                    }
+                },
+                borrower: {
+                    select: {
+                        name: true,
+                        email: true
+                    }
+                }
+            }
+        });
+
+        
+        res.status(200).json({
+            status: 'success',
+            dueBorrowings
+        })
+    } catch (err) {
+        next(err);
+    }
+}
