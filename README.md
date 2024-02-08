@@ -74,7 +74,7 @@ The **Library Management System API** uses the following technologies and tools:
 #### Deployment
 
 - **Render:** A cloud platform for hosting and deploying web applications.
-- You can try API endpoints on this link: [Library Management System](https://library-management-system-api-b8y4.onrender.com/)
+- You can try API endpoints on this link: [Library Management System](https://library-management-system-api-b8y4.onrender.com/api/v1/book)
 
 #### Version Control
 
