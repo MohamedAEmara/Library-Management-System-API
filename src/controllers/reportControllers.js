@@ -129,10 +129,57 @@ export const getLastMonthOverdue = async (req, res, next) => {
         res.status(200).json({
             status: 'success',
             message: 'CSV file created successfully with the following date',
-            borrowings: modifiedBorrowings
+            overdues: modifiedBorrowings
         });
     } catch (err) {
         next(err);
     }
 
+}
+
+
+export const getLastMonthBorrowings = async (req, res, next) => {
+    try {
+        // Get the start_date of the interval (Date.now() - milliseconds in one month)
+        const lastMonth = new Date (Date.now() - new Date(30 * 24 * 60 * 60 * 1000));
+
+        const borrowings = await prisma.borrowing.findMany({
+            where: {
+                borrowingDate: {
+                    gte: lastMonth
+                }
+            },
+            include: {
+                book: true,
+                borrower: true
+            }
+        });
+
+        let modifiedBorrowings = [];
+        borrowings.forEach(borrowing => {
+            const tmp = {
+                id: borrowing.id,
+                author: borrowing.book.author,
+                isbn: borrowing.bookISBN,
+                bookName: borrowing.book.name,
+                borrowerName: borrowing.borrower.name,
+                borrowerEmail: borrowing.borrower.email,
+                borrowingDate: borrowing.borrowingDate,
+                dueDate: borrowing.dueDate,
+                returnDate: borrowing.returnDate,
+                returned: borrowing.returnDate === null ? false : true 
+            };
+            modifiedBorrowings.push(tmp);
+        })
+        
+        await exportToCSV(modifiedBorrowings, "lastMonthBorrowings"); // Call function to export to CSV
+
+        res.status(200).json({
+            status: 'success',
+            message: 'CSV file created successfully with the following date',
+            borrowings: modifiedBorrowings
+        });
+    } catch (err) {
+        next(err);
+    }
 }
