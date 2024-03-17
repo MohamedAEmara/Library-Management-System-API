@@ -1,86 +1,41 @@
-# Library Management System
+<h1 align="center">Hi, there 👋 I'm Mohamed Emara</h1>
+<h3 align="center">A Competitive Programmer - Computer Engineering student - Web developer</h3>
 
-## Overview
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=mohamedaemara&label=Profile%20views&color=0e75b6&style=flat" alt="mohamedaemara" /> </p>
 
-Library Management System is an API that allows users to create, delete, update, read books. It also provides CRUD operations for Borrowers.
-Users can borrow a book and keep track of all valid copies of books, get all borrowings and dueDates. 
+<p align="left"> <a href="https://twitter.com/m__emara" target="blank"><img src="https://img.shields.io/twitter/follow/m__emara?logo=twitter&style=for-the-badge" alt="m__emara" /></a> </p>
 
-[![technologies](https://skillicons.dev/icons?i=nodejs,js,express,prisma,postgresql,git,github,postman)](#backend)
+- 🔭 I’m currently working on **[E-Commerce Application](https://github.com/MohamedAEmara/E-Commerce-Application)**
 
-## Table of Contents
+- 👨‍💻 All of my projects are available at **[GitHub](https://github.com/MohamedAEmara)**
 
-- [Library Management System API](#library-management-system)
-  - [Overview](#overview)
-  - [Table of Contents](#table-of-contents)
-  - [Schema Diagram for DB](#schema-diagram-for-db)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-  - [Endpoints](#endpoints)
-  - [Technology Stack](#technology-stack)
-      - [Backend](#backend)
-      - [Documentation](#documentation)
-      - [Deployment](#deployment)
-      - [Version Control](#version-control)
-  - [How to Contribute](#how-to-contribute)
+- 📫 How to reach me **[Linkedin](https://www.linkedin.com/in/emaraa/)**
 
+<h3 align="left">Connect with me:</h3>
+<p align="left">
+<a href="https://twitter.com/m__emara" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="m__emara" height="30" width="40" /></a>
+<a href="https://www.facebook.com/EmaraMohammad/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="profile.php?id=100007577461378" height="30" width="40" /></a>
+<a href="https://instagram.com/m___emara" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="m___emara" height="30" width="40" /></a>
+<a href="https://codeforces.com/profile/mohamedemara" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/codeforces.svg" alt="mohamedemara" height="30" width="40" /></a>
+<a href="https://www.leetcode.com/mohamedemara" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/leet-code.svg" alt="mohamedemara" height="30" width="40" /></a>
+</p>
 
-## Schema Diagram for DB
-![schema](docs/DB_schema.png)
-## Getting Started
+<h3 align="left">Languages and Tools:</h3>
+<h4 align="left">Backend </h4>
 
-### Prerequisites
+[![technologies](https://skillicons.dev/icons?i=js,nodejs,nestjs,express,postgresql,sqlite,mongodb)](#backend)
 
-Before getting started, Ensure you have installed the following:
+<h4 align="left">Frontend </h4>
 
-- Node.js and npm
-- PostgreSql
+[![technologies](https://skillicons.dev/icons?i=html,css,js,react)](#frontend)
 
-### Installation
-
-1. Clone the repository: `$ git clone git@github.com:MohamedAEmara/Library-Management-System-API.git`
-2. Install dependencies: `$ npm install`
-3. Configure environment variables: Create a `.env` file in the root directory.
-   - Copy [.env.example](.env.example) content to `.env` file
-   - Add values for environment variables
-     > you can set `DATABASE_URL` by the same like this format:
-     > `postgresql://USER:PASSWORD@HOST:PORT/DATABASE`
-4. Migrate prisma schema to the db by running these commands:
-   ```bash
-       $ npx prisma generate
-       $ npx prisma migrate dev --name init
-   ```
-
-## Endpoints
-
-You can check endpoints & documentation on Postman from [here](https://documenter.getpostman.com/view/29997574/2s9Yyy7yKH)
-
-## Technology Stack
-
-The **Library Management System API** uses the following technologies and tools:
-
-#### Backend
-
-- **Node.js:** The server-side runtime environment for executing JavaScript code.
-- **Express.js:** A minimal and flexible Node.js web application framework for building robust APIs.
-- **PostgreSQL:** A powerful open-source relational database used for storing books and borrowers.
-- **Prisma:** A modern database toolkit and ORM for Node.js and TypeScript.
+<h4 align="left">Development</h4>
 
 
-#### Documentation
+[![technologies](https://skillicons.dev/icons?i=git,github,docker,postman)](#frontend)
 
-- **Postman:** Used to provide a collection for API requests.
 
-#### Deployment
 
-- **Render:** A cloud platform for hosting and deploying web applications.
-- You can try API endpoints on this link: [Library Management System](https://library-management-system-api-b8y4.onrender.com/api/v1/book)
+<p><img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=mohamedaemara&show_icons=true&locale=en&layout=compact" alt="mohamedaemara" /></p>
 
-#### Version Control
-
-- **Git:** A distributed version control system.
-- **GitHub:** A web-based platform for version control and collaboration.
-
-## How to Contribute
-
-If you'd like to contribute to the project or have suggestions for improvement, please do not hesitate to make pull request.
+<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=mohamedaemara&" alt="mohamedaemara" /></p>
